@@ -8,7 +8,7 @@ def my_print(msg):
 
 
 class AthenaMetrics(object):
-    region_name = 'us-east-1'
+    region_name = 'eu-west-1'
     client = boto3.session.Session(region_name=region_name).client('athena')
 
     s3_folder = None
