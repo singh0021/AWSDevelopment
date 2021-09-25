@@ -28,7 +28,7 @@ def lambda_handler(event, context):
 
     bucket_folder = bucket + '/' + folder
 
-    client = boto3.client('athena', region_name='us-east-1')
+    client = boto3.client('athena', region_name='eu-west-1')
 
     ## The Athena query on cloudtrails table to get last days' query IDs
     query_str = """
@@ -86,7 +86,7 @@ def lambda_handler(event, context):
         f.write(athena_metrics)
         f.close()
 
-        s3 = boto3.resource('s3', region_name='us-east-1')
+        s3 = boto3.resource('s3', region_name='eu-west-1')
 
         now = datetime.datetime.now()
         current_year = now.year
