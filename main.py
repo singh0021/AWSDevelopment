@@ -32,17 +32,7 @@ def lambda_handler(event, context):
 
     ## The Athena query on cloudtrails table to get last days' query IDs
     query_str = """
-                with data as
-                (SELECT json_extract(responseelements, '$.queryExecutionId') as query_id,
-                (useridentity.arn) as uid,
-                (useridentity.sessioncontext.sessionIssuer.userName) as role,
-                from_iso8601_timestamp(eventtime) as dt
-                FROM "cloudtrail"."cloudtrail_logs_nm"
-                WHERE eventsource='athena.amazonaws.com'
-                AND eventname='StartQueryExecution'
-                AND useragent!='quicksight.amazonaws.com'
-                AND json_extract(responseelements, '$.queryExecutionId') is not null)
-                SELECT * FROM data WHERE dt >  date_add('day',-1,now())
+                Query String
                 """
 
     result = AthenaMetrics(s3_folder=bucket_folder) \
